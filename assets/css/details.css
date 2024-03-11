@@ -1,0 +1,42 @@
+.img {
+    border: 2px solid #d8d8d8;
+}
+
+.img-h-300 {
+    height:300px
+}
+.img-h-250 {
+    height:250px
+}
+
+.data-area, .data-content, .data-input {
+    /* height: 50px; */
+    width: calc(100% - 120px);
+}
+
+.data-input, .data-area {
+    border:1px solid rgb(129, 129, 129);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.data-area {
+    /* min-height: 50px; */
+    /* width: 100%; */
+}
+
+.label {
+    width: 120px;
+}
+
+.data-content {
+    /* width: 300px; */
+}
+
+.card-body {
+    font-size: 1.2rem;
+}
+
+.mlc-3 {
+    margin-left:3px;
+}

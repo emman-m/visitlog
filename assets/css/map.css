@@ -1,0 +1,60 @@
+.col{
+    border-left: 1px solid rgb(0, 75, 132);
+    border-right: 1px solid rgb(0, 75, 132);
+    margin: 10px 0px;
+}
+
+.gu-btn, .cl-btn, .ca-btn, .di-btn, .re-btn,
+.gu-div, .cl-div, .ca-div, .di-div, .re-div {
+    outline: 0;
+    border: 0;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    position: absolute;
+}
+
+/* .cl-btn {
+    top: 64px;
+    left: 2774px;
+} */
+.cl-div, .cl-btn {
+    top: 64px;
+    left: 2797px;
+}
+
+/* .gu-btn {
+    top: 2262px;
+    left: 3174px;
+} */
+.gu-div, .gu-btn {
+    top: 2262px;
+    left: 3194px;
+}
+
+/* .re-btn {
+    top: 1945px;
+    left: 3172px;
+} */
+.re-div, .re-btn {
+    top: 1945px;
+    left: 3192px;
+}
+
+/* .ca-btn {
+    top: 1505px;
+    left: 2792px;
+} */
+.ca-div, .ca-btn {
+    top: 1505px;
+    left: 2812px;
+}
+
+/* .di-btn {
+    top: 245px;
+    left: 1101px;
+} */
+.di-div, .di-btn {
+    top: 245px;
+    left: 1130px;
+}
