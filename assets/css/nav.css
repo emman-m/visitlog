@@ -1,0 +1,19 @@
+.notif-img-50 {
+    height: 50px;
+    width: 50px;
+}
+
+.notif-img {
+    border: 1px solid rgb(114, 114, 114);
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.lh-1{
+    line-height: 1
+}
+
+#notif {
+    overflow-y: auto;
+    max-height: 500px;
+}

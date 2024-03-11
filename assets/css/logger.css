@@ -1,0 +1,170 @@
+div {
+    /* border: 1px dashed black; */
+}
+.main-content {
+    background-image: url(../img/logo10.png);
+    height: calc(100vh - 206px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.main {
+    height: 100vh;
+    background-image: url(../img/lccbg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: poppinsregular;
+    padding: 60px;
+}
+
+.welcome{
+    font-size: 70px;
+    font-weight: 600;
+    color:rgb(0,75,132);
+}
+
+.ins {
+    font-size: 23px;
+    font-family: poppinsmedium;
+    color:rgb(0,75,132);
+}
+.right-panel {
+    margin-top:30px;
+    background-color: #343A40;
+    padding: 20px 80px;
+    border-radius: 20px;
+    width:500px;
+    height: 550px;
+}
+
+.dept {
+    font-size: 4rem;
+    font-weight: 400;
+    color:#F4F6F9;
+}
+
+.rfid {
+    font-size: 30px;
+    font-weight: 300;
+    color:#F4F6F9;
+}
+
+.input-group {
+    background-color: #F4F6F9;
+    width: 100%;
+    padding: 5px 20px;
+    border-radius: 8px;
+} 
+
+.idField {
+    border: none;
+    background-color: transparent;
+    width: calc(100% - 50px);
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.idField:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.fa-id-card {
+    font-size: 35px;
+}
+
+.logger-label {
+    font-size: 20px;
+    font-weight: 300;
+    color:#F4F6F9;
+}
+
+.col-left {
+    width: 600px;
+}
+
+.col-right {
+    width: 600px;
+}
+.panel {
+    height: 100%;
+}
+
+.panel2 {
+    height: 100%;
+    width: 100%;
+}
+
+img.card-icon {
+    width: 40px;
+}
+
+.exit-link {
+    width: calc(100% - 104px);
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.exit-link a {
+    margin-top: 20px;
+    text-decoration: none;
+    color: #F4F6F9;
+}
+
+img.exit-icon {
+    width: 25px;
+}
+
+.time-data {
+    margin-top: 30px;
+}
+
+
+/* RESULT */
+
+.res-img-div {
+    margin-top:15px;
+    width: 159px;
+    height: 120px;
+    border: 2px solid #F4F6F9;
+    border-radius:10px;
+}
+
+img.res-img {
+    width: 100%;
+    border-radius:10px;
+}
+
+.res-label {
+    color:#F4F6F9;
+    font-size: 18px;
+}
+
+.res-data {
+    border: 2px solid #F4F6F9;
+    color: #F4F6F9;
+    padding: 3px;
+    font-size: 15px;
+    border-radius:3px
+}
+
+.purpose {
+    height:100px
+}
+
+.closing-timer-div {
+    color: #F4F6F9;
+    text-align: right;
+}
+
+/* Loading */
+
+.loading-panel, .nodata-panel {
+    color: #F4F6F9;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
