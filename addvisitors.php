@@ -131,7 +131,7 @@ $activeLink = 'addvisitors';
                                                 </div>
                                                 <hr>
                                                 <h4>Department Appointment</h4>
-                                                
+
                                                 <!-- INPUTs -->
                                                 <!-- Cashier -->
                                                 <div class="form-group purpose-select">
@@ -140,32 +140,17 @@ $activeLink = 'addvisitors';
                                                         <label for="deptCashier" class="custom-control-label">Cashier</label>
                                                     </div>
                                                 </div>
-                                                <div class="container cashier-option" style="display:none" style="display:none">
-                                                    <?php
-                                                    $cashier = $purClass->get_purpose($dept::Cashier);
-                                                    $i = 0;
-                                                    foreach ($cashier as $val) {
-                                                        echo '
-                                                                <div class="form-group purpose-select">
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input class="custom-control-input" type="radio"  name="p-cash" id="cash' . $i . '" value="' . $val . '">
-                                                                        <label for="cash' . $i . '" class="custom-control-label font-weight-normal" >' . $val . '</label>
-                                                                    </div>
-                                                                </div>
-                                                            ';
-                                                        $i++;
-                                                    }
-                                                    echo '  <div class="form-group purpose-select">
+                                                <div class="container cashier-option" style="display:none">
 
-                                                                <div class="custom-control custom-radio">
-                                                                    <input class="custom-control-input" type="radio" name="p-cash" id="cash' . $i + 1 . '" value="Other">
-                                                                    <label for="cash' . $i + 1 . '" class="custom-control-label font-weight-normal" >Other</label>
-                                                                    <textarea class="form-control" name="p-cash-other" id="p-cash-other" rows="5" placeholder="..."></textarea>
-                                                                </div>
-                                                                <small class="err d-block text-danger err_purpose"></small>
-                                                            </div>
-                                                        ';
-                                                    ?>
+                                                    <div class="cashier-option-div"><!-- Data goes here --></div>
+
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="p-cash-other" placeholder="Other" data-btn="p-cash-add" class="form-control other-input">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn input-group-text p-cash-add" disabled><i class="fas fa-check" style="color: #00bd39;"></i></button>
+                                                        </div>
+                                                    </div>
+
                                                     <small class="err d-block text-danger err_cashieroption"></small>
                                                 </div>
 
@@ -177,31 +162,14 @@ $activeLink = 'addvisitors';
                                                     </div>
                                                 </div>
                                                 <div class="container reg-option" style="display:none">
-                                                    <?php
-                                                    $registrar = $purClass->get_purpose($dept::Registrar);
-                                                    $i = 0;
-                                                    foreach ($registrar as $val) {
-                                                        echo '
-                                                                <div class="form-group purpose-select">
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input class="custom-control-input" type="radio"  name="p-reg" id="reg' . $i . '" value="' . $val . '">
-                                                                        <label for="reg' . $i . '" class="custom-control-label font-weight-normal" >' . $val . '</label>
-                                                                    </div>
-                                                                </div>
-                                                            ';
-                                                        $i++;
-                                                    }
-                                                    echo '  <div class="form-group purpose-select">
-
-                                                                <div class="custom-control custom-radio">
-                                                                    <input class="custom-control-input" type="radio" name="p-reg" id="reg' . $i + 1 . '" value="Other">
-                                                                    <label for="reg' . $i + 1 . '" class="custom-control-label font-weight-normal" >Other</label>
-                                                                    <textarea class="form-control" name="p-reg-other" id="p-reg-other" rows="5" placeholder="..."></textarea>
-                                                                </div>
-                                                                <small class="err d-block text-danger err_purpose"></small>
-                                                            </div>
-                                                        ';
-                                                    ?>
+                                                    <!-- Data goes here -->
+                                                    <div class="reg-option-div"></div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="p-reg-other" placeholder="Other" data-btn="p-reg-add" class="form-control other-input">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn input-group-text p-reg-add" disabled><i class="fas fa-check" style="color: #00bd39;"></i></button>
+                                                        </div>
+                                                    </div>
                                                     <small class="err d-block text-danger err_regoption"></small>
                                                 </div>
 
@@ -213,31 +181,14 @@ $activeLink = 'addvisitors';
                                                     </div>
                                                 </div>
                                                 <div class="container clinic-option" style="display:none">
-                                                    <?php
-                                                    $clinic = $purClass->get_purpose($dept::Clinic);
-                                                    $i = 0;
-                                                    foreach ($clinic as $val) {
-                                                        echo '
-                                                                <div class="form-group purpose-select">
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input class="custom-control-input" type="radio"  name="p-clinic" id="clinic' . $i . '" value="' . $val . '">
-                                                                        <label for="clinic' . $i . '" class="custom-control-label font-weight-normal" >' . $val . '</label>
-                                                                    </div>
-                                                                </div>
-                                                            ';
-                                                        $i++;
-                                                    }
-                                                    echo '  <div class="form-group purpose-select">
-
-                                                                <div class="custom-control custom-radio">
-                                                                    <input class="custom-control-input" type="radio" name="p-clinic" id="clinic' . $i + 1 . '" value="Other">
-                                                                    <label for="clinic' . $i + 1 . '" class="custom-control-label font-weight-normal" >Other</label>
-                                                                    <textarea class="form-control" name="p-clinic-other" id="p-clinic-other" rows="5" placeholder="..."></textarea>
-                                                                </div>
-                                                                <small class="err d-block text-danger err_purpose"></small>
-                                                            </div>
-                                                        ';
-                                                    ?>
+                                                    <!-- Data goes here -->
+                                                    <div class="clinic-option-div"></div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="p-clinic-other" placeholder="Other" data-btn="p-clinic-add" class="form-control other-input">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn input-group-text p-clinic-add" disabled><i class="fas fa-check" style="color: #00bd39;"></i></button>
+                                                        </div>
+                                                    </div>
                                                     <small class="err d-block text-danger err_clinicoption"></small>
                                                 </div>
 
@@ -249,31 +200,14 @@ $activeLink = 'addvisitors';
                                                     </div>
                                                 </div>
                                                 <div class="container discipline-option" style="display:none">
-                                                    <?php
-                                                    $disof = $purClass->get_purpose($dept::DisciplineOffice);
-                                                    $i = 0;
-                                                    foreach ($disof as $val) {
-                                                        echo '
-                                                                <div class="form-group purpose-select">
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input class="custom-control-input" type="radio"  name="p-discipline" id="discipline' . $i . '" value="' . $val . '">
-                                                                        <label for="discipline' . $i . '" class="custom-control-label font-weight-normal" >' . $val . '</label>
-                                                                    </div>
-                                                                </div>
-                                                            ';
-                                                        $i++;
-                                                    }
-                                                    echo '  <div class="form-group purpose-select">
-
-                                                                <div class="custom-control custom-radio">
-                                                                    <input class="custom-control-input" type="radio" name="p-discipline" id="discipline' . $i + 1 . '" value="Other">
-                                                                    <label for="discipline' . $i + 1 . '" class="custom-control-label font-weight-normal" >Other</label>
-                                                                    <textarea class="form-control" name="p-discipline-other" id="p-discipline-other" rows="5" placeholder="..."></textarea>
-                                                                </div>
-                                                                <small class="err d-block text-danger err_purpose"></small>
-                                                            </div>
-                                                        ';
-                                                    ?>
+                                                    <!-- Data goes here -->
+                                                    <div class="discipline-option-div"></div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="p-discipline-other" placeholder="Other" data-btn="p-discipline-add" class="form-control other-input">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn input-group-text p-discipline-add" disabled><i class="fas fa-check" style="color: #00bd39;"></i></button>
+                                                        </div>
+                                                    </div>
                                                     <small class="err d-block text-danger err_disciplineoption"></small>
                                                 </div>
                                                 <!-- INPUTs -->
