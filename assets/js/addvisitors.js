@@ -33,14 +33,13 @@ function readURL(input) {
 }
 // Camera Script
 var video = document.getElementById('cameraFeed')
-// Access the user's camera
+
 function openCamera() {
     $('#cameraFeed').show();
     $('.open-camera').hide();
     $('.capture-camera').show();
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
-            // Assign the camera stream to the video element
             const videoElement = document.getElementById('cameraFeed');
             videoElement.srcObject = stream;
         })
@@ -63,35 +62,26 @@ function stopCamera() {
     $('.capture-camera').hide();
 }
 
-// Function to capture a photo from the camera feed
 function capturePhoto() {
-    // Get the video element
     const videoElement = document.getElementById('cameraFeed');
-
-    // Create a canvas to draw the current frame from the video
     const canvas = document.createElement('canvas');
     canvas.width = videoElement.videoWidth;
     canvas.height = videoElement.videoHeight;
-
-    // Draw the current frame onto the canvas
     const context = canvas.getContext('2d');
-    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-    // Convert the canvas content to a data URL (base64-encoded image)
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
     const capturedPhoto = canvas.toDataURL('image/png');
 
-    // Set the captured photo data URL as the value of the input field
     const capturedPhotoInput = document.getElementById('img');
     capturedPhotoInput.value = capturedPhoto;
 
-    // Optionally, display the captured photo (for demonstration purposes)
     const capturedPhotoDisplay = document.getElementById('preview');
     capturedPhotoDisplay.src = capturedPhoto;
     stopCamera();
 }
 
 $(function () {
-
+    // purpose of visit
     function shoHideOption(ele, val, clss, radio) {
         if (ele.val() == val && ele.is(':checked')) {
             $(clss).show();
@@ -102,18 +92,55 @@ $(function () {
         }
     }
 
-    $('textarea').on('input', function() {
-        const radio = $(this).attr('name').split('-other')[0];
-        $(`input[type=radio][name=${radio}]`).prop('checked', false);
-        $(this).siblings('input').prop('checked', true);
+    var purposeCount = 1;
+    function addPurpose(inputVal, inputName, div, addInput) {
+        var html = `<div class="input-group mb-3" id="pcount${purposeCount}">
+                        <input type="text" name="${inputName}" class="form-control" value="${inputVal}" readonly />
+                        <div class="input-group-append">
+                            <button type="button" class="btn input-group-text remove-input" data-input="pcount${purposeCount}"><i class="fas fa-times" style="color: #ff0000;"></i></button>
+                        </div>
+                    </div>`;
+        $(div).append(html);
+        $(addInput).val("");
+
+        const btn = '.'+$(addInput).data('btn');
+        $(btn).prop('disabled', true);
+        purposeCount ++;
+    }
+
+    $(document).on('input', '.other-input', function(e) {
+        const ele = $(this).data('btn');
+        if ($(this).val() == "") {
+            $(`.${ele}`).prop('disabled', true);
+        } else {
+            $(`.${ele}`).prop('disabled', false);
+        }
+    })
+    
+    $(document).on('click', '.remove-input', function() {
+        const input = $(this).data('input');
+        $(`#${input}`).remove();
+        purposeCount--;
     })
 
-    $('input[type=radio]').on('click', function() {
-        if  ($(this).val() !== 'Other') {
-            const textarea = $(this).attr('name')+'-other';
-            $(`textarea[name=${textarea}]`).val("");
-        }
-        
+    $('.p-cash-add').on('click', function() {
+        var inputVal = $('input[name=p-cash-other]').val();
+        addPurpose(inputVal, 'p-cash-input[]', '.cashier-option-div', 'input[name=p-cash-other]');
+    })
+
+    $('.p-reg-add').on('click', function() {
+        var inputVal = $('input[name=p-reg-other]').val();
+        addPurpose(inputVal, 'p-reg-input[]', '.reg-option-div', 'input[name=p-reg-other]');
+    })
+
+    $('.p-clinic-add').on('click', function() {
+        var inputVal = $('input[name=p-clinic-other]').val();
+        addPurpose(inputVal, 'p-clinic-input[]', '.clinic-option-div', 'input[name=p-clinic-other]');
+    })
+
+    $('.p-discipline-add').on('click', function() {
+        var inputVal = $('input[name=p-discipline-other]').val();
+        addPurpose(inputVal, 'p-discipline-input[]', '.discipline-option-div', 'input[name=p-discipline-other]');
     })
 
     $('input[type=checkbox]').on('click', function() {
@@ -122,6 +149,23 @@ $(function () {
         shoHideOption($(this), '3', '.clinic-option', 'p-clinic');
         shoHideOption($(this), '4', '.discipline-option', 'p-discipline');
     })
+
+    $.ajax({
+        url:        'handler/dbhandler.php',
+        type:       'post',
+        data:       {action: 'get_purpose'},
+        dataType:   'json',
+        success:    function(data) {
+            console.log(data);
+            $('.cashier-option-div').prepend(data.cashier);
+            $('.reg-option-div').prepend(data.registrar);
+            $('.clinic-option-div').prepend(data.clinic);
+            $('.discipline-option-div').prepend(data.discipline);
+        },
+        error:      function(err) {
+            console.log(err.responseText);
+        }
+    });
 
 
     $('#birthday').on('change', function() {
@@ -133,14 +177,11 @@ $(function () {
         $('#age').val(ageInYears);
     });
 
-    // $("#addVisitorForm").on("submit", function (e) {
-    //     e.preventDefault();
-    // });
 
     $('#submit').on('click', function() {
         var form = $("#addVisitorForm").serialize();
 
-        console.log(form);
+        // console.log(form);
         $.ajax({
             type: "POST",
             data: form + "&action=add_visitor",
@@ -182,6 +223,7 @@ $(function () {
             },
             error: function (err) {
                 console.log(err.responseText);
+                $('.err_msg').html(err.responseText);
                 $('#submit').html('Save');
                 $("#submit").prop("disabled", false);
                 $("input, textarea, select").prop("disabled", false);

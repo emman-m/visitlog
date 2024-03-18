@@ -13,7 +13,11 @@
                 <img src="assets/img/empty-pic.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?php echo $_SESSION['uname'] ?></a>
+                <a href="#" class="d-block"><?php echo $_SESSION['uname'] ?><br>
+                    <small>
+                        <?php echo $_SESSION['dept'] == 0 ? $user_role->get_name($_SESSION['role']) : $dept->get_name($_SESSION['dept']) ?>
+                    </small>
+                </a>
             </div>
         </div>
 
@@ -73,6 +77,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="purpose.php" class="nav-link <?php echo $activeLink == 'purpose' ? 'active' : ''; ?>">
+                            <i class="nav-icon fas fa-list-ul"></i>
+                            <p>
+                                Purpose of Visit List
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="visitormap.php" class="nav-link <?php echo $activeLink == 'visitormap' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-map-marked-alt"></i>
                             <p>
@@ -126,7 +138,7 @@
                         <a href="logger.php" class="nav-link <?php echo $activeLink == 'rfid' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-id-card"></i>
                             <p>
-                                RFID
+                                Visitor Attendance
                             </p>
                         </a>
                     </li>

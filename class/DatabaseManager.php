@@ -209,9 +209,10 @@ Class DatabaseManager {
         $query = "DELETE FROM $table $where";
         
         if ($this->connection->query($query) === TRUE) {
-            return "Record(s) deleted successfully";
+            return true;
         } else {
-            return "Error: " . $query . "<br>" . $this->connection->error;
+            // return "Error: " . $query . "<br>" . $this->connection->error;
+            return false;
         }
     }
 

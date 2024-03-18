@@ -192,27 +192,19 @@ if(isset($_POST['action'] )) {
                     switch ($pur) {
                         case $dept::Cashier:
                             if (isset($_POST['p-cash'])) {
-                                if ($_POST['p-cash'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-cash-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-cash'];
+                                foreach ($_POST['p-cash'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
-                                $errMsg['err_cashieroption'] = "Please select from the options";
-                                $valid++;
                             }
 
-                            break;
-
-                        case $dept::Clinic:
-                            if (isset($_POST['p-clinic'])) {
-                                if ($_POST['p-clinic'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-clinic-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-clinic'];
+                            if (isset($_POST['p-cash-input'])) {
+                                foreach ($_POST['p-cash-input'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
-                                $errMsg['err_clinicoption'] = "Please select from the options";
+                            }
+
+                            if (!isset($_POST['p-cash']) && !isset($_POST['p-cash-input'])) {
+                                $errMsg['err_cashieroption'] = "Please select from the options";
                                 $valid++;
                             }
 
@@ -220,26 +212,59 @@ if(isset($_POST['action'] )) {
 
                         case $dept::Registrar:
                             if (isset($_POST['p-reg'])) {
-                                if ($_POST['p-reg'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-reg-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-reg'];
+                                foreach ($_POST['p-reg'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
+                            }
+
+                            if (isset($_POST['p-reg-input'])) {
+                                foreach ($_POST['p-reg-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-reg']) && !isset($_POST['p-reg-input'])) {
                                 $errMsg['err_regoption'] = "Please select from the options";
                                 $valid++;
                             }
 
                             break;
 
-                        default:
-                            if (isset($_POST['p-discipline'])) {
-                                if ($_POST['p-discipline'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-discipline-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-discipline'];
+                        case $dept::Clinic:
+                            if (isset($_POST['p-clinic'])) {
+                                foreach ($_POST['p-clinic'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
+                            }
+
+                            if (isset($_POST['p-clinic-input'])) {
+                                foreach ($_POST['p-clinic-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-clinic']) && !isset($_POST['p-clinic-input'])) {
+                                $errMsg['err_clinicoption'] = "Please select from the options";
+                                $valid++;
+                            }
+
+                            break;
+
+                        default:
+
+                            if (isset($_POST['p-discipline'])) {
+                                foreach ($_POST['p-discipline'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (isset($_POST['p-discipline-input'])) {
+                                foreach ($_POST['p-discipline-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-discipline']) && !isset($_POST['p-discipline-input'])) {
                                 $errMsg['err_disciplineoption'] = "Please select from the options";
                                 $valid++;
                             }
@@ -266,6 +291,28 @@ if(isset($_POST['action'] )) {
 
                 // Update old user where rfid is registered
                 $db->update('visitors', array('rfid' => ''), array('rfid' => $_POST['rfid']));
+
+                // Insert new purpose
+                if (isset($_POST['p-cash-input'])) {
+                    foreach ($_POST['p-cash-input'] as $val) {
+                        $db->insert("purpose", array('department'=>$dept::Cashier, 'name'=>$val));
+                    }
+                }
+                if (isset($_POST['p-reg-input'])) {
+                    foreach ($_POST['p-reg-input'] as $val) {
+                        $db->insert("purpose", array('department'=>$dept::Registrar, 'name'=>$val));
+                    }
+                }
+                if (isset($_POST['p-clinic-input'])) {
+                    foreach ($_POST['p-clinic-input'] as $val) {
+                        $db->insert("purpose", array('department'=>$dept::Clinic, 'name'=>$val));
+                    }
+                }
+                if (isset($_POST['p-discipline-input'])) {
+                    foreach ($_POST['p-discipline-input'] as $val) {
+                        $db->insert("purpose", array('department'=>$dept::DisciplineOffice, 'name'=>$val));
+                    }
+                }
 
                 $insertData = array(
                     "name" => $_POST['name'], 
@@ -338,27 +385,19 @@ if(isset($_POST['action'] )) {
                     switch ($pur) {
                         case $dept::Cashier:
                             if (isset($_POST['p-cash'])) {
-                                if ($_POST['p-cash'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-cash-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-cash'];
+                                foreach ($_POST['p-cash'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
-                                $errMsg['err_cashieroption'] = "Please select from the options";
-                                $valid++;
                             }
 
-                            break;
-
-                        case $dept::Clinic:
-                            if (isset($_POST['p-clinic'])) {
-                                if ($_POST['p-clinic'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-clinic-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-clinic'];
+                            if (isset($_POST['p-cash-input'])) {
+                                foreach ($_POST['p-cash-input'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
-                                $errMsg['err_clinicoption'] = "Please select from the options";
+                            }
+
+                            if (!isset($_POST['p-cash']) && !isset($_POST['p-cash-input'])) {
+                                $errMsg['err_cashieroption'] = "Please select from the options";
                                 $valid++;
                             }
 
@@ -366,26 +405,59 @@ if(isset($_POST['action'] )) {
 
                         case $dept::Registrar:
                             if (isset($_POST['p-reg'])) {
-                                if ($_POST['p-reg'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-reg-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-reg'];
+                                foreach ($_POST['p-reg'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
+                            }
+
+                            if (isset($_POST['p-reg-input'])) {
+                                foreach ($_POST['p-reg-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-reg']) && !isset($_POST['p-reg-input'])) {
                                 $errMsg['err_regoption'] = "Please select from the options";
                                 $valid++;
                             }
 
                             break;
 
-                        default:
-                            if (isset($_POST['p-discipline'])) {
-                                if ($_POST['p-discipline'] == 'Other') {
-                                    $purpose[$pur] = $_POST['p-discipline-other'];
-                                } else {
-                                    $purpose[$pur] = $_POST['p-discipline'];
+                        case $dept::Clinic:
+                            if (isset($_POST['p-clinic'])) {
+                                foreach ($_POST['p-clinic'] as $val) {
+                                    $purpose[$pur][] = $val;
                                 }
-                            } else {
+                            }
+
+                            if (isset($_POST['p-clinic-input'])) {
+                                foreach ($_POST['p-clinic-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-clinic']) && !isset($_POST['p-clinic-input'])) {
+                                $errMsg['err_clinicoption'] = "Please select from the options";
+                                $valid++;
+                            }
+
+                            break;
+
+                        default:
+
+                            if (isset($_POST['p-discipline'])) {
+                                foreach ($_POST['p-discipline'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (isset($_POST['p-discipline-input'])) {
+                                foreach ($_POST['p-discipline-input'] as $val) {
+                                    $purpose[$pur][] = $val;
+                                }
+                            }
+
+                            if (!isset($_POST['p-discipline']) && !isset($_POST['p-discipline-input'])) {
                                 $errMsg['err_disciplineoption'] = "Please select from the options";
                                 $valid++;
                             }
@@ -402,6 +474,28 @@ if(isset($_POST['action'] )) {
             if ($valid == 0) {
                 // Update old user where rfid is registered
                 $db->update('visitors', array('rfid' => ''), array('rfid' => $_POST['rfid']));
+
+                // Insert new purpose
+                if (isset($_POST['p-cash-input'])) {
+                    foreach ($_POST['p-cash-input'] as $val) {
+                        $db->insert("purpose", array('department' => $dept::Cashier, 'name' => $val));
+                    }
+                }
+                if (isset($_POST['p-reg-input'])) {
+                    foreach ($_POST['p-reg-input'] as $val) {
+                        $db->insert("purpose", array('department' => $dept::Registrar, 'name' => $val));
+                    }
+                }
+                if (isset($_POST['p-clinic-input'])) {
+                    foreach ($_POST['p-clinic-input'] as $val) {
+                        $db->insert("purpose", array('department' => $dept::Clinic, 'name' => $val));
+                    }
+                }
+                if (isset($_POST['p-discipline-input'])) {
+                    foreach ($_POST['p-discipline-input'] as $val) {
+                        $db->insert("purpose", array('department' => $dept::DisciplineOffice, 'name' => $val));
+                    }
+                }
 
                 $insertData = array(
                     "name" => $_POST['name'], 
@@ -1105,15 +1199,68 @@ if(isset($_POST['action'] )) {
 
         // Not using
         case 'get_purpose':
-            $html = '<option value="" selected disabled>Please Select</option>';
-            $res = $purpose->get_purpose($_POST['id']);
+            $cashier = $db->selectAll('purpose');
 
-            foreach ($res as $row) {
-               $html .= '<option value="'.$row.'">'.$row.'</option>';
+            foreach ($cashier as $row) {
+                switch ($row['department']) {
+                    case $dept::Cashier:
+                        $result['cashier'][] = '
+                            <div class="form-group purpose-select">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" name="p-cash[]" id="cash' . $row['id'] . '" value="' . $row['name'] . '">
+                                    <label for="cash' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
+                                </div>
+                            </div>
+                        ';
+                        break;
+                    case $dept::Registrar:
+                        $result['registrar'][] = '
+                            <div class="form-group purpose-select">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox"  name="p-reg[]" id="reg' . $row['id'] . '" value="' . $row['name'] . '">
+                                    <label for="reg' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
+                                </div>
+                            </div>
+                        ';
+                        break;
+                    case $dept::Clinic:
+                        $result['clinic'][] = '
+                            <div class="form-group purpose-select">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox"  name="p-clinic[]" id="clinic' . $row['id'] . '" value="' . $row['name'] . '">
+                                    <label for="clinic' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
+                                </div>
+                            </div>
+                        ';
+                        break;
+                    case $dept::DisciplineOffice:
+                        $result['discipline'][] = '
+                            <div class="form-group purpose-select">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox"  name="p-discipline[]" id="discipline' . $row['id'] . '" value="' . $row['name'] . '">
+                                    <label for="discipline' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
+                                </div>
+                            </div>
+                        ';
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+                
             }
-            $html .= '<option value="other">Other</option>';
 
-            $result['option'] = $html;
+            break;
+
+        case 'delete_purpose':
+
+            $del = $db->delete('purpose', array('id'=>$_POST['id']));
+            if ($del) {
+                $result['success'] = true;
+            } else {
+                $result['success'] = false;
+            }
+            
             break;
         default:
             # code...

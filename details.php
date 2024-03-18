@@ -41,7 +41,7 @@ if ($notif['is_read'] == 0) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VisitLog | Blank Page</title>
+    <title>VisitLog | Details</title>
     <link rel="icon" type="image/png" href="assets/img/logo.png" />
 
     <?php include "component/global-css.php"; ?>
