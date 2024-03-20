@@ -122,7 +122,11 @@ if ($notif['is_read'] == 0) {
                                                         Purpose:
                                                     </div>
                                                     <div class="data-content mlc-3">
-                                                        <div class="data-area"><?php echo $activity['purpose'] ?? ""; ?></div>
+                                                        <div class="data-area">
+                                                            <?php
+                                                            echo '<ol><li>' . implode('</li><li>', json_decode($activity['purpose'], true)) . '</li></ol>';
+                                                            ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

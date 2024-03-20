@@ -58,6 +58,7 @@ $(function () {
 	            type : 'POST',
 		        error: function(e) {
 		        	console.log(e);
+					$('.err_msg').html(e.responseText);
 		        }
 	        },
 	        stateSave: false,
