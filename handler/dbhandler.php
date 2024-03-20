@@ -5,12 +5,10 @@ require '../class/DatabaseManager.php';
 require '../enum/UserRole.php';
 require '../enum/Department.php';
 require '../enum/NotifType.php';
-require '../class/Purpose.php';
 $db = new DatabaseManager();
 $user_role = new UserRole();
 $dept = new Department();
 $notif_type = new NotifType();
-$purpose = new Purpose();
 
 // POST
 if(isset($_POST['action'] )) {
@@ -700,14 +698,14 @@ if(isset($_POST['action'] )) {
                 $type = 0;
 
                 $purpose = "";
+                $purposeArr = [];
                 $arr = json_decode($visitor['purpose'], true);
 
-                foreach ($arr as $key => $val) {
-                    if ($_SESSION['dept'] == $key) {
-                        $purpose = $val;
-                        break;
-                    }
+                if (isset($arr[$_SESSION['dept']])) {
+                    $purpose = '<ol><li>'.implode('</li><li>', $arr[$_SESSION['dept']]).'</li></ol>';
+                    $purposeArr = $arr[$_SESSION['dept']];
                 }
+                // $purpose = $val;
 
                 switch ($case) {
                     case 'insert':
@@ -715,7 +713,7 @@ if(isset($_POST['action'] )) {
                         $insertData = array(
                             'visitor_id' => $visitor['id'],
                             'department' => $_SESSION['dept'],
-                            'purpose' => $purpose,
+                            'purpose' => json_encode($purposeArr),
                             'time_in' => Date('Y-m-d H:i:s')
                         );
                         $logId = $db->insert('visitors_activity', $insertData);
@@ -1197,7 +1195,6 @@ if(isset($_POST['action'] )) {
 
             break;
 
-        // Not using
         case 'get_purpose':
             $cashier = $db->selectAll('purpose');
 

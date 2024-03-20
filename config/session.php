@@ -3,10 +3,8 @@ session_start();
 date_default_timezone_set('Asia/Manila');
 require 'enum/UserRole.php';
 require 'enum/Department.php';
-require 'class/Purpose.php';
 $user_role = new UserRole();
 $dept = new Department();
-$purClass = new Purpose();
 
 $baseUrl = strtolower(explode('/', $_SERVER['SERVER_PROTOCOL'])[0]).'://'.$_SERVER['SERVER_NAME'].'/visitlog/';
 $url = explode('/', $_SERVER['PHP_SELF']);

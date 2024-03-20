@@ -53,9 +53,10 @@ foreach ($data as $row) {
     $timeIn = $dateIn->format("D F n Y, h:i A");
 
     if ((intVal($_SESSION['dept']) !== 0) && (intVal($_SESSION['dept']) !== 5)) {
-        $deptstr = $row['purpose'];
+        $deptstr = '<ol><li>' . implode('</li><li>', json_decode($row['purpose'], true)) . '</li></ol>';
     } else {
-        $deptstr = '[' . $dept->get_name($row['department']) . ']' . $row['purpose'];
+        $deptstr = '[' . $dept->get_name($row['department']) . ']' .
+        '<ol><li>' . implode('</li><li>', json_decode($row['purpose'], true)) . '</li></ol>';
     }
 
 
