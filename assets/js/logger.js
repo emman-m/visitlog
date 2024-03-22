@@ -91,6 +91,7 @@ $(function(){
                 },
                 error : function (err) {
                     console.log(err.responseText);
+                    $('.err_msg').html(err.responseText);
                 }
             });
 

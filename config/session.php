@@ -3,8 +3,15 @@ session_start();
 date_default_timezone_set('Asia/Manila');
 require 'enum/UserRole.php';
 require 'enum/Department.php';
+require 'class/DatabaseManager.php';
 $user_role = new UserRole();
 $dept = new Department();
+$db = new DatabaseManager();
+
+if (isset($_SESSION['uid']) && (!$db->checkUserActive($_SESSION['uid']))) {
+    session_destroy();
+    header('location:login.php');
+}
 
 $baseUrl = strtolower(explode('/', $_SERVER['SERVER_PROTOCOL'])[0]).'://'.$_SERVER['SERVER_NAME'].'/visitlog/';
 $url = explode('/', $_SERVER['PHP_SELF']);

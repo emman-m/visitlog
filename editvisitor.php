@@ -1,8 +1,6 @@
 <?php include "config/session.php";
 $activeLink = 'visitors';
 
-require "class/DatabaseManager.php";
-$db = new DatabaseManager();
 
 if (!isset($_GET['id'])) {
     header('location:visitors.php');

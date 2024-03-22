@@ -1,8 +1,6 @@
 <?php include "config/session.php";
 $activeLink = 'users';
 
-require 'class/DatabaseManager.php';
-$db = new DatabaseManager();
 
 if (!isset($_GET['id'])) {
     header('location:users.php');

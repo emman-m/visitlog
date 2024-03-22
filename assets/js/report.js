@@ -37,7 +37,7 @@ $(function () {
             type:'post',
             dataType:'json',
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 $('#result').html(data);
                 var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d');
                 var stackedBarChartData = $.extend(true, {}, data.result);
@@ -75,7 +75,7 @@ $(function () {
             type:'post',
             dataType:'json',
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
                 var areaChartOptions = {
@@ -106,8 +106,8 @@ $(function () {
                 })
             },
             error: function(err) {
-                console.log(err.responseText);
-                $('#result').html(err.responseText);
+                // console.log(err.responseText);
+                // $('#result').html(err.responseText);
             }
         });
     }

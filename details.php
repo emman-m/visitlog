@@ -6,8 +6,6 @@ if (!isset($_GET['id']) || $_GET['id'] == null) {
 }
 
 include "config/session.php";
-require 'class/DatabaseManager.php';
-$db = new DatabaseManager();
 $activeLink = 'dashboard';
 
 if (isset($_GET['id'])) {
