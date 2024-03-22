@@ -1,0 +1,7 @@
+.dt-paging.paging_simple_numbers{
+    margin-top: 10px;
+    float: inline-end;
+}
+.dt-paging-button {
+    padding:2px 10px!important;
+}

@@ -1,6 +1,8 @@
 <?php
 if (!isset($_GET['id']) || $_GET['id'] == null) {
-    die();
+    if (!isset($_GET['uid']) || $_GET['uid'] == null) {
+        die();
+    }
 }
 
 include "config/session.php";
@@ -8,32 +10,40 @@ require 'class/DatabaseManager.php';
 $db = new DatabaseManager();
 $activeLink = 'dashboard';
 
+if (isset($_GET['id'])) {
+    $data[0] = $db->selectWhere("notif", array('id' => $_GET['id']));
+    $notif = $data[0][0];
 
-$data[0] = $db->selectWhere("notif", array('id' => $_GET['id']));
-$notif = $data[0][0];
-
-if ($_SESSION['role'] == $user_role::SecurityHead || $_SESSION['dept'] == $dept::Guard) {
-    $data[1] = $db->selectWhere("visitors_activity", array('id' => $notif['activity_id']));
-    if ($data[1]) {
-        $activity = $data[1][0];
-        $rfid = true;
+    if ($_SESSION['role'] == $user_role::SecurityHead || $_SESSION['dept'] == $dept::Guard) {
+        $data[1] = $db->selectWhere("visitors_activity", array('id' => $notif['activity_id']));
+        if ($data[1]) {
+            $activity = $data[1][0];
+            $rfid = true;
+        } else {
+            $data[1] = [];
+            $activity = [];
+            $rfid = false;
+        }
     } else {
         $data[1] = [];
         $activity = [];
         $rfid = false;
     }
+
+    $data[2] = $db->selectWhere("visitors", array('id' => $notif['visitor_id']));
+    $visitor = $data[2][0];
+    // Update notif to read
+    if ($notif['is_read'] == 0) {
+        $db->update("notif", array('is_read' => 1), array('id' => $_GET['id']));
+    }
 } else {
-    $data[1] = [];
-    $activity = [];
     $rfid = false;
+    if (isset($_GET['uid'])) {
+        $data = $db->selectWhere("visitors", array('id' => $_GET['uid']));
+        $visitor = $data[0];
+    }
 }
 
-$data[2] = $db->selectWhere("visitors", array('id' => $notif['visitor_id']));
-$visitor = $data[2][0];
-// Update notif to read
-if ($notif['is_read'] == 0) {
-    $db->update("notif", array('is_read' => 1), array('id' => $_GET['id']));
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +134,21 @@ if ($notif['is_read'] == 0) {
                                                     <div class="data-content mlc-3">
                                                         <div class="data-area">
                                                             <?php
-                                                            echo '<ol><li>' . implode('</li><li>', json_decode($activity['purpose'], true)) . '</li></ol>';
+                                                            if (!$rfid) {
+                                                                $p = json_decode($visitor['purpose'], true);
+                                                                foreach ($p as $d => $pVal) {
+                                                                    if (($_SESSION['role'] == $user_role::SecurityHead || $_SESSION['dept'] == $dept::Guard) || (intVal($d) == intVal($_SESSION['dept']))) {
+
+                                                                        echo $dept->get_name($d);
+                                                                        // $purposeInfo = json_decode($pVal, true);
+                                                                        echo '<ol><li>' . implode('</li><li>', $pVal) . '</li></ol>';
+                                                                        // echo $v;
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                echo '<ol><li>' . implode('</li><li>', json_decode($activity['purpose'], true)) . '</li></ol>';
+                                                            }
+
                                                             ?>
                                                         </div>
                                                     </div>
