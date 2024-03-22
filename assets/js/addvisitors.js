@@ -197,7 +197,7 @@ $(function () {
                 $(".err").html("");
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 if (data.success) {
                     $('.err_msg').html(`<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>${data.msg}</div>`);
                     setTimeout(function(){

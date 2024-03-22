@@ -1,8 +1,5 @@
 <?php include "config/session.php";
 date_default_timezone_set('Asia/Manila');
-require 'class/DatabaseManager.php';
-$db = new DatabaseManager();
-
 $activeLink = 'visitormap';
 ?>
 <!DOCTYPE html>

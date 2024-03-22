@@ -33,6 +33,9 @@ $(document).ready(function(){
                     query = true;
                 },
                 success: function(data) {
+                    if (data.notActive) {
+                        location.href = "logout.php";
+                    }
                     if (notif < data.count) {
                         console.log(data);
                         $("#notif").html(data.notif);

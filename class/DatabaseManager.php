@@ -467,40 +467,15 @@ Class DatabaseManager {
         // Close the database connection
         $this->connection->close();
     }
+
+    public function checkUserActive($id) {
+        $data = $this->selectWhere("user_account", array('id'=>$id, 'active'=>1));
+
+        if ($data) {
+            return true;
+        }
+        return false;
+    }
 }
 
-// // Usage example:
-// $db = new DatabaseManager("localhost", "username", "password", "database_name");
-
-// // Example of using the selectAll function
-// $data = $db->selectAll("your_table_name");
-// print_r($data);
-
-// // Example of using the selectWhere function
-// $conditions = array(
-//     "column1" => "value1",
-//     "column2" => "value2",
-//     "column3" => "value3"
-// );
-// $dataWhere = $db->selectWhere("your_table_name", $conditions);
-// print_r($dataWhere);
-
-// // Example of using the insert function
-// $insertData = array("column1" => "value1", "column2" => "value2");
-// $result = $db->insert("your_table_name", $insertData);
-// echo $result;
-
-// // Example of using the delete function
-// $deleteCondition = "id = 5";
-// $result = $db->delete("your_table_name", $deleteCondition);
-// echo $result;
-
-// // Example of using the update function
-// $updateData = array("column1" => "new_value1", "column2" => "new_value2");
-// $updateCondition = "id = 3";
-// $result = $db->update("your_table_name", $updateData, $updateCondition);
-// echo $result;
-
-// // Don't forget to close the connection when done
-// $db->closeConnection();
 ?>

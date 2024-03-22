@@ -32,6 +32,7 @@ date_default_timezone_set('Asia/Manila');
     <div class="wrapper main">
         <div class="panel">
             <div class="panel2 align-content-center align-items-center d-flex justify-content-center">
+                <div class="err_msg"></div>
                 <!-- LEFT -->
                 <div class="col-left text-center">
                     <div class="row">
