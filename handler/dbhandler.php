@@ -37,8 +37,7 @@ if (isset($_POST['action'])) {
 
                 if ($valid == 0) {
                     $conditions = array(
-                        "username" => $_POST['username'],
-                        'active' => 1
+                        "username" => $_POST['username']
                     );
                     $data = $db->selectWhere("user_account", $conditions);
                     if (count($data) > 0) {
@@ -46,18 +45,24 @@ if (isset($_POST['action'])) {
                         //verify password from db
                         $verification = password_verify($_POST['password'], $row['password']);
 
-                        if ($verification) {
-                            $result['success'] = true;
+                        if (intVal($row['active']) == 1) {
+                            if ($verification) {
+                                $result['success'] = true;
 
-                            $_SESSION['uid'] = $row['id'];
-                            $_SESSION['uname'] = $row['firstname'] . ' ' . $row['lastname'];
-                            $_SESSION['role'] = $row['role'];
-                            $_SESSION['dept'] = $row['department'];
-                            $_SESSION['active'] = $row['active'];
+                                $_SESSION['uid'] = $row['id'];
+                                $_SESSION['uname'] = $row['firstname'] . ' ' . $row['lastname'];
+                                $_SESSION['role'] = $row['role'];
+                                $_SESSION['dept'] = $row['department'];
+                                $_SESSION['active'] = $row['active'];
+                            } else {
+                                $result['success'] = false;
+                                $errMsg['err_msg'] = "Login Failed";
+                            }
                         } else {
                             $result['success'] = false;
-                            $errMsg['err_msg'] = "Login Failed";
+                            $errMsg['err_msg'] = "Your Account is disabled.";
                         }
+                        
                     } else {
                         $result['success'] = false;
                         $errMsg['err_msg'] = "Login Failed";
