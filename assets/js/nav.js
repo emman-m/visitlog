@@ -82,5 +82,28 @@ $(document).ready(function(){
         const realTimeClock = document.getElementById('cur_time');
         realTimeClock.textContent = formattedTime;
     }
+
+    $('#av').on('change', function() {
+        $.ajax({
+            url: 'handler/dbhandler.php',
+            data: {action: 'change_dept_status'},
+            type: 'post',
+            dataType: 'json',
+            beforeSend: function(){
+                $('#av').prop('disabled', true);
+            },
+            success: function(data) {
+                if (data.success) {
+                    $('#av').prop('disabled', false);
+                    $('#av').siblings('label').removeClass('text-success text-danger').addClass(data.class);
+                }
+            },
+            error: function(err) {
+                $('#av').prop('disabled', false);
+                $('#av').prop('checked', !$('#av').is(':checked'));
+                $('/err_msg').html(err.responseText);
+            }
+        })
+    })
     
 });

@@ -9,7 +9,7 @@
     <div class="sidebar">
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
+            <div class="align-items-center d-flex image">
                 <img src="assets/img/empty-pic.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
@@ -26,6 +26,25 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
+                <?php
+                if ($_SESSION['dept_active']) {
+                    $color = 'text-success';
+                    $checked = 'checked';
+                } else {
+                    $color = 'text-danger';
+                    $checked = '';
+                }
+                if ($_SESSION['dept'] > 0 && $_SESSION['dept'] < 5) { ?>
+                    <li class="nav-item px-3">
+                        <div class="form-group">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                <input type="checkbox" class="custom-control-input" id="av" <?php echo $checked ?>>
+                                <label class="custom-control-label <?php echo $color ?>" for="av">Available</label>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
+
                 <li class="nav-item">
                     <a href="index.php" class="nav-link <?php echo $activeLink == 'dashboard' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

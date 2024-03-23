@@ -73,11 +73,56 @@ $activeLink = 'dashboard';
                         </div>
                         <div class="col-lg-6">
                             <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Available Department</h3>
-                                </div>
                                 <div class="card-body">
+                                    <?php
+                                    $data = $db->selectNative("SELECT department FROM user_account WHERE dept_active = '1' AND department BETWEEN '1' AND '4' GROUP BY department");
 
+                                    if ($data) {
+                                        echo '<h5>Available Department</h5><hr>';
+                                        foreach ($data as $row) {
+
+                                            switch ($row['department']) {
+                                                case $dept::Cashier:
+                                                    $icon = '<span class="info-box-icon"><i class="fas fa-coins"></i></span>';
+                                                    $bg = 'bg-success';
+                                                    break;
+
+                                                case $dept::Registrar:
+                                                    $icon = '<span class="info-box-icon"><i class="fas fa-file-archive"></i></span>';
+                                                    $bg = 'bg-warning';
+                                                    break;
+
+                                                case $dept::Clinic:
+                                                    $icon = '<span class="info-box-icon"><i class="fas fa-clinic-medical"></i></span>';
+                                                    $bg = 'bg-primary';
+                                                    break;
+
+                                                case $dept::DisciplineOffice:
+                                                    $icon = '<span class="info-box-icon"><i class="fas fa-hands-helping"></i></span>';
+                                                    $bg = 'bg-danger';
+                                                    break;
+
+                                                default:
+                                                    $icon = '';
+                                                    break;
+                                            }
+
+                                            echo '
+                                                    <div class="info-box mb-1 '. $bg .'" style="min-height:46px">
+                                                        '. $icon .'
+
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text">' . $dept->get_name($row['department']) . '</span>
+                                                        </div>
+                                                        <!-- /.info-box-content -->
+                                                    </div>
+                                                ';
+                                        }
+                                    } else {
+                                        echo 'No Available Offices';
+                                    }
+
+                                    ?>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

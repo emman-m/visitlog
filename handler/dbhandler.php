@@ -15,7 +15,6 @@ if (isset($_POST['action'])) {
     $userActive = true;
     if (isset($_SESSION['uid'])) {
         $userActive = $db->checkUserActive($_SESSION['uid']);
-        
     }
     $result = [];
 
@@ -54,6 +53,7 @@ if (isset($_POST['action'])) {
                                 $_SESSION['role'] = $row['role'];
                                 $_SESSION['dept'] = $row['department'];
                                 $_SESSION['active'] = $row['active'];
+                                $_SESSION['dept_active'] = $row['dept_active'];
                             } else {
                                 $result['success'] = false;
                                 $errMsg['err_msg'] = "Login Failed";
@@ -62,7 +62,6 @@ if (isset($_POST['action'])) {
                             $result['success'] = false;
                             $errMsg['err_msg'] = "Your Account is disabled.";
                         }
-                        
                     } else {
                         $result['success'] = false;
                         $errMsg['err_msg'] = "Login Failed";
@@ -1243,6 +1242,18 @@ if (isset($_POST['action'])) {
                     $result['success'] = false;
                 }
 
+                break;
+
+            case 'change_dept_status':
+                $_SESSION['dept_active'] = !$_SESSION['dept_active'];
+
+                $db->update('user_account', array('dept_active' => $_SESSION['dept_active']), array('department' => $_SESSION['dept']));
+
+                $result['class'] = 'text-danger';
+                if ($_SESSION['dept_active']) {
+                    $result['class'] = 'text-success';
+                }
+                $result['success'] = true;
                 break;
             default:
                 # code...
