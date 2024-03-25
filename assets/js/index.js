@@ -30,7 +30,8 @@ var table;
     		bDestroy: true,
 			initComplete: function () {
 				if (table.rows().data().length == 0) {
-					// $('.visitor-list').html("No Appointment Today");
+					$('.visitor-list').html("No Appointment Today")
+					.removeClass('px-0');
 				}
 			},
 			createdRow: function (row, data, dataIndex) {
