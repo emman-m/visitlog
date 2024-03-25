@@ -122,7 +122,7 @@ class Functions
                         <!-- Cashier -->
                         <div class="form-group purpose-select">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="cashier-option" data-options="p-cash" id="deptCashier" value="<?php echo $dept::Cashier ?>">
+                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="cashier-option" data-options="p-cash" id="deptCashier" value="' . $this->dept::Cashier . '">
                                 <label for="deptCashier" class="custom-control-label">Cashier</label>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ class Functions
                         <!-- Registrar -->
                         <div class="form-group purpose-select">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="reg-option" data-options="p-reg" id="deptRegistrar" value="<?php echo $dept::Registrar ?>">
+                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="reg-option" data-options="p-reg" id="deptRegistrar" value="' . $this->dept::Registrar . '">
                                 <label for="deptRegistrar" class="custom-control-label">Registrar</label>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ class Functions
                         <!-- Clinic -->
                         <div class="form-group purpose-select">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="clinic-option" data-options="p-clinic" id="deptClinic" value="<?php echo $dept::Clinic ?>">
+                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="clinic-option" data-options="p-clinic" id="deptClinic" value="' . $this->dept::Clinic . '">
                                 <label for="deptClinic" class="custom-control-label">Clinic</label>
                             </div>
                         </div>
@@ -193,7 +193,7 @@ class Functions
                         <!-- DisciplineOffice -->
                         <div class="form-group purpose-select">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="discipline-option" data-options="p-discipline" id="deptDisciplineOffice" value="<?php echo $dept::DisciplineOffice ?>">
+                                <input class="custom-control-input" type="checkbox" name="p[]" data-target="discipline-option" data-options="p-discipline" id="deptDisciplineOffice" value="' . $this->dept::DisciplineOffice . '">
                                 <label for="deptDisciplineOffice" class="custom-control-label">Discipline Office</label>
                             </div>
                         </div>

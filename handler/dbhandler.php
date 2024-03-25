@@ -258,7 +258,7 @@ if (isset($_POST['action'])) {
 
                                 break;
 
-                            default:
+                            case $dept::DisciplineOffice:
 
                                 if (isset($_POST['p-discipline'])) {
                                     foreach ($_POST['p-discipline'] as $val) {
@@ -277,6 +277,8 @@ if (isset($_POST['action'])) {
                                     $valid++;
                                 }
 
+                                break;
+                            default :
                                 break;
                         }
                     }
