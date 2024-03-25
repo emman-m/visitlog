@@ -82,13 +82,13 @@ function capturePhoto() {
 
 $(function () {
     // purpose of visit
-    function shoHideOption(ele, val, clss, radio) {
-        if (ele.val() == val && ele.is(':checked')) {
-            $(clss).show();
-        } else if (ele.val() == val && !ele.is(':checked')) {
-            $(clss).hide();
-            $(`input[name=${radio}]`).prop('checked', false);
-            $(`textarea[name=${radio}-other]`).val("");
+    function shoHideOption(ele, clss, option) {
+        $(`.${option}`).prop('checked', false);
+        $(`.${option}-other`).val("");
+        if (ele.is(':checked')) {
+            $(clss).slideDown();
+        } else {
+            $(clss).slideUp();
         }
     }
 
@@ -144,10 +144,7 @@ $(function () {
     })
 
     $('input[type=checkbox]').on('click', function() {
-        shoHideOption($(this), '1', '.cashier-option', 'p-cash');
-        shoHideOption($(this), '2', '.reg-option', 'p-reg');
-        shoHideOption($(this), '3', '.clinic-option', 'p-clinic');
-        shoHideOption($(this), '4', '.discipline-option', 'p-discipline');
+        shoHideOption($(this), `.${$(this).data('target')}`, `${$(this).data('options')}`);
     })
 
     $.ajax({
