@@ -258,7 +258,7 @@ if (isset($_POST['action'])) {
 
                                 break;
 
-                            default:
+                            case $dept::DisciplineOffice:
 
                                 if (isset($_POST['p-discipline'])) {
                                     foreach ($_POST['p-discipline'] as $val) {
@@ -277,6 +277,8 @@ if (isset($_POST['action'])) {
                                     $valid++;
                                 }
 
+                                break;
+                            default :
                                 break;
                         }
                     }
@@ -1189,7 +1191,7 @@ if (isset($_POST['action'])) {
                             $result['cashier'][] = '
                                 <div class="form-group purpose-select">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox" name="p-cash[]" id="cash' . $row['id'] . '" value="' . $row['name'] . '">
+                                        <input class="custom-control-input p-cash" type="checkbox" name="p-cash[]" id="cash' . $row['id'] . '" value="' . $row['name'] . '">
                                         <label for="cash' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
                                     </div>
                                 </div>
@@ -1199,7 +1201,7 @@ if (isset($_POST['action'])) {
                             $result['registrar'][] = '
                                 <div class="form-group purpose-select">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox"  name="p-reg[]" id="reg' . $row['id'] . '" value="' . $row['name'] . '">
+                                        <input class="custom-control-input p-reg" type="checkbox"  name="p-reg[]" id="reg' . $row['id'] . '" value="' . $row['name'] . '">
                                         <label for="reg' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
                                     </div>
                                 </div>
@@ -1209,7 +1211,7 @@ if (isset($_POST['action'])) {
                             $result['clinic'][] = '
                                 <div class="form-group purpose-select">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox"  name="p-clinic[]" id="clinic' . $row['id'] . '" value="' . $row['name'] . '">
+                                        <input class="custom-control-input p-clinic" type="checkbox"  name="p-clinic[]" id="clinic' . $row['id'] . '" value="' . $row['name'] . '">
                                         <label for="clinic' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
                                     </div>
                                 </div>
@@ -1219,7 +1221,7 @@ if (isset($_POST['action'])) {
                             $result['discipline'][] = '
                                 <div class="form-group purpose-select">
                                     <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox"  name="p-discipline[]" id="discipline' . $row['id'] . '" value="' . $row['name'] . '">
+                                        <input class="custom-control-input p-discipline" type="checkbox"  name="p-discipline[]" id="discipline' . $row['id'] . '" value="' . $row['name'] . '">
                                         <label for="discipline' . $row['id'] . '" class="custom-control-label font-weight-normal" >' . $row['name'] . '</label>
                                     </div>
                                 </div>
