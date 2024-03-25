@@ -43,9 +43,9 @@ $condition = array(
 $dateNow = date('Y-m-d');
 
 if ($_SESSION['role'] == $user_role::SecurityHead || $_SESSION['dept'] == $dept::Guard) {
-    $data = $db->selectNative("SELECT * FROM visitors WHERE updated_at LIKE '$dateNow%'");
+    $data = $db->selectNative("SELECT * FROM visitors WHERE updated_at LIKE '$dateNow%' LIMIT $offset, $limit");
 } else {
-    $data = $db->selectNative("SELECT * FROM visitors WHERE purpose LIKE '%\"" . $_SESSION['dept'] . "\"%' AND updated_at LIKE '$dateNow%'");
+    $data = $db->selectNative("SELECT * FROM visitors WHERE purpose LIKE '%\"" . $_SESSION['dept'] . "\"%' AND updated_at LIKE '$dateNow%' LIMIT $offset, $limit");
 }
 
 $return_data = array();

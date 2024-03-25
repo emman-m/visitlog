@@ -3,6 +3,8 @@ $(function() {
 var table;
     function initializetable(){
 		table = $("#visitorTable").DataTable({
+			pageLength: 4,
+			lengthMenu: [4],
 			responsive: true,
             pagingType: 'simple_numbers',
 			aaSorting: [],
@@ -18,10 +20,14 @@ var table;
         	fixedColumns:   {
 		        "leftColumns": 0
 		    },
-			pageLength : 10,
 		    ajax:{
 				url : "handler/datatable/appointmenthandler.php",
 	            type : 'POST',
+				data: function(data) {
+					// console.log(data);
+					data.length = 3;
+					// data.start = 0;
+				},
 		        error: function(e) {
 		        	$('.err_msg').html(e.responseText);
 		        }
